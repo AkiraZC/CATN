@@ -29,8 +29,10 @@ class CATN_RUNNER:
             Reviews_mask = np.zeros_like(Reviews, dtype=np.float32)
 
             for _id, review in reviews.items():
-                Reviews[_id] = review
                 Reviews_mask[_id] = (review != -1)
+                review = [20000 if w == -1 else w for w in review]
+                review = np.array(review)
+                Reviews[_id] = review
 
             return Reviews, Reviews_mask
 
